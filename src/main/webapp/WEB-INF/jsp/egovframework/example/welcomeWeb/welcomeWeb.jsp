@@ -21,20 +21,28 @@
 					<div class="content table-responsive table-full-width">
 						<table class="table table-hover table-striped">
 							<thead>
-								<c:forEach items="${selectColumn}" var="selectColumn">
-									<c:forEach begin="1" end ="${selectCount}">
-										<th><c:out value="${selectColumn }" /></th>
+								<c:forEach items="${selectColumn}" var="selectColumn" varStatus="column">
+									<c:forEach items="${selectCounts}" var="selectCount" varStatus="count">
+										<c:if test="${column.index == count.index}">
+											<c:forEach begin="1" end="${selectCount }"> 
+												<th><c:out value="${selectColumn}" /></th>
+											</c:forEach>
+										</c:if>
 									</c:forEach>
 								</c:forEach>
 							</thead>
-							<tbody>
+							 <tbody>
 								<c:forEach items="${selectSeqNo}" var="selectSeqNo">
 									<c:forEach items="${welcomeWebList}" var="welcomeWebList">
 										<c:if test="${selectSeqNo == welcomeWebList.seqNo }">
 											<tr>
-												<c:forEach items="${selectColumn}" var="selectColumn">
-													<c:forEach begin="1" end="${selectCount}">
-														<td><c:out value="${welcomeWebList[selectColumn]}" /></td>
+												<c:forEach items="${selectColumn}" var="selectColumn" varStatus="column">
+													<c:forEach items="${selectCounts}" var ="selectCount" varStatus="count">
+														<c:if test="${column.index == count.index}">
+															<c:forEach begin="1" end="${selectCount}">
+																<td><c:out value="${welcomeWebList[selectColumn]}" /></td>	
+															</c:forEach>
+														</c:if>
 													</c:forEach>
 													<%-- <c:if test="${selectCount eq '2'}">
 														<td><c:out value="${welcomeWebList[selectColumn]}" /></td>
@@ -44,7 +52,7 @@
 										</c:if>
 									</c:forEach>
 								</c:forEach>
-							</tbody>
+							</tbody> 
 						</table>
 					</div>
 					<div class="content">
